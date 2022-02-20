@@ -4,9 +4,14 @@ class QuantityBox extends React.Component {
   render() {
     return (
       <>
-        <button>-</button>
-        <input type="text" value="1"></input>
-        <button>+</button>
+        <button onClick={this.props.decreaseQuantity}>-</button>
+        <input
+          type="text"
+          placeholder="1"
+          value={String(this.props.quantity)}
+          readOnly
+        ></input>
+        <button onClick={this.props.incrementQuantity}>+</button>
       </>
     );
   }
