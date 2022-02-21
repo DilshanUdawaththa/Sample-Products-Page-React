@@ -30,7 +30,8 @@ class ProductPage extends React.Component {
 
     this.incrementQuantity = this.incrementQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
-    this.submit1 = this.submit1.bind(this);
+    this.submit = this.submit.bind(this);
+    this.deleteRow = this.deleteRow.bind(this);
   }
 
   incrementQuantity(e) {
@@ -51,9 +52,10 @@ class ProductPage extends React.Component {
     }
   }
 
-  submit1(e) {
+  submit(e) {
     e.preventDefault();
     const cartDetails = {
+      id: new Date(),
       itemNo: productDetails.itemNo,
       quantity: this.state.quantity,
       title: productDetails.title,
@@ -68,10 +70,19 @@ class ProductPage extends React.Component {
     }));
   }
 
+  deleteRow(pid) {
+    debugger;
+    if (pid !== "") {
+      this.setState({
+        arrayList: this.state.arrayList.filter((array) => array.id !== pid),
+      });
+    }
+  }
+
   render() {
     return (
       <>
-        <form onSubmit={this.submit1}>
+        <form onSubmit={this.submit}>
           <section className="product">
             <div className="row">
               <div className="leftSide">
@@ -106,7 +117,10 @@ class ProductPage extends React.Component {
           </section>
         </form>
         <section className="table">
-          <ProductTable tableDetails={this.state.arrayList} />
+          <ProductTable
+            tableDetails={this.state.arrayList}
+            deleteRow={this.deleteRow}
+          />
         </section>
       </>
     );

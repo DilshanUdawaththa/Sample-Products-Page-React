@@ -16,7 +16,7 @@ class ProductTable extends React.Component {
           </thead>
           <tbody>
             {this.props.tableDetails.map((array) => (
-              <tr>
+              <tr key={array.id}>
                 <td>{array.itemNo}</td>
                 <td>{array.title}</td>
                 <td>{String(array.quantity)}</td>
@@ -25,7 +25,10 @@ class ProductTable extends React.Component {
                   {String(array.amount)}
                 </td>
                 <td>
-                  <button className="delete-btn" onClick={this.props.deleteRow}>
+                  <button
+                    className="delete-btn"
+                    onClick={() => this.props.deleteRow(array.id)}
+                  >
                     Delete
                   </button>
                 </td>
